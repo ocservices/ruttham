@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mua Hàng Việt - Nhận Nụ Cười Việt | Đăng Ký Rút Thăm Trúng Thưởng</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Lexend', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        brandBlue: {
+                            light: '#f0f4ff',
+                            DEFAULT: '#1e40af',
+                            dark: '#1e3a8a',
+                        },
+                        brandRed: {
+                            light: '#fef2f2',
+                            DEFAULT: '#dc2626',
+                            dark: '#991b1b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+        }
+        .ticket-shadow {
+            box-shadow: 0 10px 30px -5px rgba(30, 64, 175, 0.15);
+        }
+        .gold-border {
+            border-image: linear-gradient(to right, #f59e0b, #fbbf24, #f59e0b) 1;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col antialiased">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 text-center py-2 px-4 text-xs md:text-sm font-extrabold tracking-wide flex items-center justify-center gap-2 shadow-inner">
+        <i class="fa-solid fa-gift animate-bounce"></i>
+        <span>CHƯƠNG TRÌNH TRI ÂN KHÁCH HÀNG: MUA HÀNG VIỆT - NHẬN NỤ CƯỜI VIỆT!</span>
+    </div>
+
+    <!-- Header Section with Dual Logos -->
+    <header class="bg-white border-b border-slate-100 py-4 px-4 md:px-6 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <!-- Logo Chợ Đông Ba -->
+            <div class="flex items-center gap-3">
+                <div class="border-2 border-brandRed rounded-lg p-2 bg-brandRed-light">
+                    <span class="font-serif font-bold text-brandRed tracking-tight text-base md:text-lg leading-none block text-center">CHỢ ĐÔNG BA<br><span class="text-[10px] font-sans tracking-widest font-semibold text-slate-700">NAM CALI</span></span>
+                </div>
+                <div class="h-8 w-[1px] bg-slate-300 hidden sm:block"></div>
+                <p class="text-[11px] text-slate-500 max-w-[140px] hidden lg:block font-medium">Hương vị quê nhà - Đậm đà bản sắc Việt trên đất Mỹ</p>
+            </div>
+
+            <!-- Program Banner Core Text -->
+            <div class="text-center">
+                <h1 class="text-brandBlue font-black text-xl md:text-2xl tracking-tight leading-none uppercase">
+                    Mua Hàng Việt - Nhận Nụ Cười Việt
+                </h1>
+                <p class="text-[10px] md:text-xs text-amber-500 font-bold uppercase tracking-widest mt-1">
+                    Sự kiện kết hợp đặc quyền giữa ẩm thực và sức khỏe
+                </p>
+            </div>
+
+            <!-- Logo Nha Khoa Nụ Cười Việt -->
+            <div class="flex items-center gap-3">
+                <div class="text-right hidden lg:block">
+                    <p class="text-xs text-slate-500 font-medium">Hệ thống nha khoa uy tín</p>
+                    <p class="text-[10px] text-emerald-600 font-bold"><i class="fa-solid fa-circle-check"></i> Tiêu chuẩn quốc tế</p>
+                </div>
+                <div class="h-8 w-[1px] bg-slate-300 hidden sm:block"></div>
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 rounded-full bg-brandBlue-light flex items-center justify-center text-brandBlue text-xl font-bold border border-blue-200">
+                        <i class="fa-solid fa-tooth text-brandBlue animate-pulse"></i>
+                    </div>
+                    <div class="text-left">
+                        <span class="font-bold text-brandBlue block leading-tight text-xs md:text-sm">Hệ Thống Nha Khoa</span>
+                        <span class="font-serif font-extrabold text-amber-500 block leading-none text-sm md:text-base">NỤ CƯỜI VIỆT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-8">
+        
+        <!-- Hero Banner section -->
+        <section class="custom-gradient rounded-2xl md:rounded-3xl p-6 md:p-10 text-white relative overflow-hidden shadow-xl">
+            <!-- Decorative Light effects -->
+            <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-brandBlue opacity-20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-20 -top-20 w-80 h-80 bg-amber-400 opacity-15 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-7 space-y-4">
+                    <span class="bg-amber-400 text-slate-950 font-extrabold text-xs px-4 py-1.5 rounded-full uppercase tracking-wider inline-block">
+                        <i class="fa-solid fa-fire mr-1"></i>Đăng ký kích hoạt phiếu bốc thăm
+                    </span>
+                    <h2 class="text-3xl md:text-5xl font-black leading-tight">
+                        Quét Mã Tức Thì <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-300">Nhận Ngay Giải Thưởng!</span>
+                    </h2>
+                    <p class="text-slate-300 text-sm md:text-base max-w-xl leading-relaxed">
+                        Chào mừng quý khách đến với cổng đăng ký bốc thăm của <strong class="text-white">Chợ Đông Ba Nam Cali</strong> phối hợp cùng <strong class="text-white">Nha Khoa Nụ Cười Việt</strong>. Chỉ với vài thao tác điền hóa đơn dưới đây, bạn đã chính thức tham gia kỳ quay số trúng thưởng lớn!
+                    </p>
+                    
+                    <!-- Quick instructions list -->
+                    <div class="space-y-2 pt-2 text-xs md:text-sm text-slate-200">
+                        <div class="flex items-center gap-2">
+                            <span class="w-5 h-5 bg-amber-400 text-slate-950 rounded-full flex items-center justify-center font-bold text-[10px]">1</span>
+                            <span>Nhập Họ tên, Địa chỉ, Số điện thoại của bạn.</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-5 h-5 bg-amber-400 text-slate-950 rounded-full flex items-center justify-center font-bold text-[10px]">2</span>
+                            <span>Điền chính xác <strong>Mã Số Bốc Thăm (Entry Number)</strong> in trên Phiếu Rút Thăm.</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-5 h-5 bg-amber-400 text-slate-950 rounded-full flex items-center justify-center font-bold text-[10px]">3</span>
+                            <span>Bấm gửi phiếu và giữ lại hóa đơn giấy để đối chiếu khi nhận giải.</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Graphic Highlight widget -->
+                <div class="lg:col-span-5 flex justify-center w-full">
+                    <div class="bg-white/10 backdrop-blur-md border border-white/25 p-6 rounded-2xl w-full max-w-sm space-y-4">
+                        <span class="text-[10px] uppercase font-bold text-amber-300 tracking-widest block text-center">Hệ thống bốc thăm tự động</span>
+                        <div class="border-b border-white/10 pb-3 text-center">
+                            <p class="text-xs text-slate-300">Tổng trị giá giải thưởng lên tới</p>
+                            <p class="text-4xl font-black text-white mt-1">$5,400+</p>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center text-xs text-slate-200 bg-white/5 p-2 rounded-lg">
+                                <span>Giải Tháng định kỳ:</span>
+                                <span class="font-bold text-amber-300">$600/Tháng</span>
+                            </div>
+                            <div class="flex justify-between items-center text-xs text-slate-200 bg-white/5 p-2 rounded-lg">
+                                <span>Giải Đặc Biệt Năm (01/2027):</span>
+                                <span class="font-bold text-emerald-400">$1,800</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prize breakdown visual board -->
+        <section class="space-y-6">
+            <div class="text-center max-w-xl mx-auto space-y-2">
+                <h3 class="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight uppercase">Chi Tiết Quà Tặng</h3>
+                <div class="h-1 w-16 bg-brandBlue mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Monthly Box (Blue outline) -->
+                <div class="bg-white border-2 border-brandBlue rounded-2xl p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-brandBlue text-white text-[9px] uppercase font-extrabold tracking-widest py-1 px-3.5 rounded-bl-xl">
+                        Mỗi Tháng
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl bg-blue-50 text-brandBlue flex items-center justify-center text-lg font-bold"><i class="fa-solid fa-gift"></i></span>
+                            <div>
+                                <h4 class="text-brandBlue font-extrabold text-base uppercase">GIẢI THÁNG ĐỊNH KỲ</h4>
+                                <p class="text-slate-400 text-[11px] font-semibold">Tổ chức quay thưởng cuối mỗi tháng</p>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-2.5">
+                            <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="text-xl">🧺</span>
+                                    <div>
+                                        <p class="font-bold text-xs text-slate-800">01 Giỏ Hàng Chợ Đông Ba</p>
+                                        <p class="text-[10px] text-slate-400">Đặc sản quê hương đặc biệt</p>
+                                    </div>
+                                </div>
+                                <span class="text-brandBlue font-black text-sm">$200</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="text-xl">🦷</span>
+                                    <div>
+                                        <p class="font-bold text-xs text-slate-800">Gói Khám Răng Nụ Cười Việt</p>
+                                        <p class="text-[10px] text-slate-400">Chăm sóc toàn diện, tẩy trắng cao cấp</p>
+                                    </div>
+                                </div>
+                                <span class="text-brandBlue font-black text-sm">$400</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-t border-slate-100 mt-4 pt-3 flex items-center justify-between text-[11px] font-bold text-brandBlue">
+                        <span>Tổng giá trị giải tháng:</span>
+                        <span>$600 / Tháng</span>
+                    </div>
+                </div>
+
+                <!-- Grand Winner Box (Red outline) -->
+                <div class="bg-white border-2 border-brandRed rounded-2xl p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-brandRed text-white text-[9px] uppercase font-extrabold tracking-widest py-1 px-3.5 rounded-bl-xl">
+                        CHUNG KẾT
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl bg-red-50 text-brandRed flex items-center justify-center text-lg font-bold"><i class="fa-solid fa-trophy"></i></span>
+                            <div>
+                                <h4 class="text-brandRed font-extrabold text-base uppercase">GIẢI ĐẶC BIỆT NĂM</h4>
+                                <p class="text-slate-400 text-[11px] font-semibold">Tổ chức bốc thăm vào Tháng 01/2027</p>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-2.5">
+                            <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="text-xl">🎁</span>
+                                    <div>
+                                        <p class="font-bold text-xs text-slate-800">Giỏ Hàng Tết Thượng Hạng</p>
+                                        <p class="text-[10px] text-slate-400">Từ Chợ Đông Ba Nam Cali</p>
+                                    </div>
+                                </div>
+                                <span class="text-brandRed font-black text-sm">$300</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="text-xl">✈️</span>
+                                    <div>
+                                        <p class="font-bold text-xs text-slate-800">Tour Du Lịch Huế Trọn Gói</p>
+                                        <p class="text-[10px] text-slate-400">Kết hợp chăm sóc thẩm mỹ tại Huế</p>
+                                    </div>
+                                </div>
+                                <span class="text-brandRed font-black text-sm">$1,500</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-t border-slate-100 mt-4 pt-3 flex items-center justify-between text-[11px] font-bold text-brandRed">
+                        <span>Tổng giá trị giải đặc biệt:</span>
+                        <span>$1,800</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Ticket Draw & Form -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pt-4">
+            
+            <!-- Left Side: Interactive Input Form (5 cols) -->
+            <div class="lg:col-span-5 bg-white border border-slate-200 rounded-2xl p-6 shadow-md space-y-6">
+                <div>
+                    <h3 class="text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-ticket text-brandBlue"></i>
+                        Kích Hoạt Phiếu Rút Thăm
+                    </h3>
+                    <p class="text-slate-500 text-xs mt-1">Quý khách vui lòng điền đúng thông tin liên lạc để nhận thưởng.</p>
+                </div>
+
+                <form id="lotteryForm" onsubmit="submitForm(event)" class="space-y-4">
+                    <!-- Full name input -->
+                    <div>
+                        <label for="fullName" class="block text-xs font-bold uppercase text-slate-700 mb-1.5 tracking-wider">Full Name <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+                                <i class="fa-solid fa-user text-xs"></i>
+                            </span>
+                            <input type="text" id="fullName" required placeholder="Ví dụ: TOM TRAN"
+                                class="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brandBlue/30 focus:border-brandBlue transition-all"
+                                oninput="syncTicketData()">
+                        </div>
+                    </div>
+
+                    <!-- Address input -->
+                    <div>
+                        <label for="address" class="block text-xs font-bold uppercase text-slate-700 mb-1.5 tracking-wider">City, Sate <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+                                <i class="fa-solid fa-location-dot text-xs"></i>
+                            </span>
+                            <input type="text" id="address" required placeholder="Thành phố, Tiểu bang"
+                                class="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brandBlue/30 focus:border-brandBlue transition-all"
+                                oninput="syncTicketData()">
+                        </div>
+                    </div>
+
+                    <!-- Phone number input -->
+                    <div>
+                        <label for="phoneNumber" class="block text-xs font-bold uppercase text-slate-700 mb-1.5 tracking-wider">Số Điện Thoại <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+                                <i class="fa-solid fa-phone text-xs"></i>
+                            </span>
+                            <input type="tel" id="phoneNumber" required placeholder="Ví dụ: 714-XXX-XXXX"
+                                class="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brandBlue/30 focus:border-brandBlue transition-all"
+                                oninput="syncTicketData()">
+                        </div>
+                    </div>
+
+                    <!-- Entry number (Mã phiếu bốc thăm) -->
+                    <div>
+                        <label for="entryNumber" class="block text-xs font-bold uppercase text-slate-700 mb-1.5 tracking-wider">Mã Số Bốc Thăm (Entry Number) <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+                                <i class="fa-solid fa-hashtag text-xs"></i>
+                            </span>
+                            <input type="text" id="entryNumber" required placeholder="Mã ghi trên Phiếu Rút Thăm của bạn"
+                                class="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brandBlue/30 focus:border-brandBlue transition-all uppercase font-mono font-bold"
+                                oninput="syncTicketData()">
+                        </div>
+                        <p class="text-[10px] text-slate-400 mt-1"><i class="fa-solid fa-info-circle mr-1"></i> Nhập đúng chữ và số trên Phiếu Rút Thăm giấy (ví dụ: EDB-123456).</p>
+                    </div>
+
+                    <!-- Terms checkbox -->
+                    <div class="flex items-start gap-2 pt-1">
+                        <input type="checkbox" id="terms" required class="mt-1 h-4 w-4 text-brandBlue focus:ring-brandBlue border-slate-300 rounded cursor-pointer">
+                        <label for="terms" class="text-xs text-slate-500 leading-normal cursor-pointer select-none">
+                            Tôi cam kết thông tin cung cấp ở trên là hoàn toàn chính xác để làm cơ sở nhận giải thưởng từ Ban tổ chức.
+                        </label>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="submit" 
+                        class="w-full bg-brandBlue hover:bg-brandBlue-dark text-white font-bold py-3 px-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 transform active:scale-[0.98]">
+                        <i class="fa-solid fa-paper-plane animate-pulse"></i>
+                        Gửi Phiếu Tham Gia
+                    </button>
+                </form>
+            </div>
+
+            <!-- Right Side: Digital Real-Time Ticket Preview (7 cols) -->
+            <div class="lg:col-span-7 space-y-4">
+                <div class="flex items-center justify-between">
+                    <span class="text-slate-700 font-bold text-sm uppercase flex items-center gap-1.5">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 block animate-ping"></span>
+                        Bản Xem Trước Vé Điện Tử (Live Preview)
+                    </span>
+                    <button onclick="fillSampleData()" class="text-xs text-brandBlue hover:underline font-semibold flex items-center gap-1">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        Điền nhanh thông tin mẫu
+                    </button>
+                </div>
+
+                <!-- Digital Ticket Mockup resembling physical ticket cards -->
+                <div id="physicalTicketMockup" class="bg-white border border-slate-300 rounded-xl shadow-lg overflow-hidden relative">
+                    <!-- Top accent line representing branding -->
+                    <div class="h-2 bg-gradient-to-r from-brandRed via-amber-400 to-brandBlue"></div>
+                    
+                    <div class="p-5 sm:p-6 space-y-6">
+                        <!-- Top Row Logos -->
+                        <div class="grid grid-cols-12 gap-2 items-center border-b border-dashed border-slate-200 pb-4">
+                            <!-- Left: Chợ Đông Ba Logo representation -->
+                            <div class="col-span-4 text-left">
+                                <span class="font-serif font-black text-brandRed tracking-tight text-[11px] sm:text-xs leading-none block">CHỢ ĐÔNG BA<br><span class="text-[8px] font-sans font-bold text-slate-600 tracking-wider">NAM CALI</span></span>
+                            </div>
+                            <!-- Middle: Main header indicator -->
+                            <div class="col-span-4 text-center">
+                                <span class="bg-brandBlue text-white text-[7px] sm:text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wide inline-block">PHIẾU BỐC THĂM CHÍNH THỨC</span>
+                            </div>
+                            <!-- Right: Nha Khoa Logo representation -->
+                            <div class="col-span-4 text-right flex flex-col items-end">
+                                <span class="font-sans font-bold text-slate-500 text-[8px] tracking-wide block">Nha Khoa</span>
+                                <span class="font-serif font-black text-amber-500 text-[11px] sm:text-xs leading-none block">NỤ CƯỜI VIỆT</span>
+                            </div>
+                        </div>
+
+                        <!-- Main Core of Ticket Info -->
+                        <div class="space-y-5">
+                            <h4 class="text-center text-brandBlue font-extrabold text-xl sm:text-2xl tracking-widest uppercase">
+                                MUA HÀNG VIỆT - NHẬN NỤ CƯỜI VIỆT
+                            </h4>
+
+                            <!-- Custom handwritten layout values -->
+                            <div class="space-y-3.5 max-w-md mx-auto">
+                                <!-- Full Name Line -->
+                                <div class="flex items-end gap-2 text-xs sm:text-sm">
+                                    <span class="text-slate-500 font-bold shrink-0">Full Name:</span>
+                                    <div class="flex-1 border-b border-blue-200 pb-0.5 min-h-[22px] px-2 font-semibold text-brandBlue font-mono text-xs sm:text-sm" id="ticketFullName">
+                                        ____________________________________
+                                    </div>
+                                </div>
+                                <!-- Address Line -->
+                                <div class="flex items-end gap-2 text-xs sm:text-sm">
+                                    <span class="text-slate-500 font-bold shrink-0">City, State:</span>
+                                    <div class="flex-1 border-b border-blue-200 pb-0.5 min-h-[22px] px-2 font-semibold text-brandBlue font-mono text-xs sm:text-sm" id="ticketAddress">
+                                        ____________________________________
+                                    </div>
+                                </div>
+                                <!-- Phone Number Line -->
+                                <div class="flex items-end gap-2 text-xs sm:text-sm">
+                                    <span class="text-slate-500 font-bold shrink-0">Phone Number:</span>
+                                    <div class="flex-1 border-b border-blue-200 pb-0.5 min-h-[22px] px-2 font-semibold text-brandBlue font-mono text-xs sm:text-sm" id="ticketPhoneNumber">
+                                        ____________________________________
+                                    </div>
+                                </div>
+                                <!-- Entry Number Line -->
+                                <div class="flex items-end gap-2 text-xs sm:text-sm">
+                                    <span class="text-slate-500 font-bold shrink-0">Mã rút thăm:</span>
+                                    <div class="flex-1 border-b border-blue-200 pb-0.5 min-h-[22px] px-2 font-black text-brandRed font-mono text-sm sm:text-base tracking-widest" id="ticketEntryNumber">
+                                        ____________________________________
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ticket QR Area and Code matching physical designs -->
+                        <div class="border-t border-slate-100 pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <div class="flex items-start gap-2.5 text-slate-500">
+                                <span class="text-2xl text-slate-300"><i class="fa-solid fa-qrcode"></i></span>
+                                <div class="text-[10px] leading-snug">
+                                    <p class="font-bold text-slate-700">Xác thực hệ thống bốc thăm tự động</p>
+                                    <p class="text-slate-500">Thông tin được mã hóa bảo mật trên máy chủ nội bộ.</p>
+                                </div>
+                            </div>
+                            <div class="bg-slate-50 px-3 py-1.5 rounded border border-slate-100 text-center shrink-0">
+                                <span class="text-[8px] text-slate-400 uppercase tracking-widest block font-bold">Mã bảo mật phiếu</span>
+                                <span class="text-xs font-bold text-slate-600 font-mono" id="ticketSecurityHash">S-#####</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Decorative physical card punchholes on sides -->
+                    <div class="absolute left-0 top-1/2 -translate-y-1/2 w-3 h-6 bg-slate-50 border-r border-slate-300 rounded-r-full"></div>
+                    <div class="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-6 bg-slate-50 border-l border-slate-300 rounded-l-full"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Success Modal Popup -->
+    <div id="successModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 space-y-6 shadow-2xl border border-slate-100 transform transition-all scale-95 duration-200" id="successModalCard">
+            <div class="text-center space-y-2">
+                <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto animate-bounce">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h3 class="text-xl font-extrabold text-slate-900">Nộp Phiếu Thành Công!</h3>
+                <p class="text-slate-500 text-xs">Cảm ơn quý khách đã hoàn tất gửi thông tin tham gia chương trình bốc thăm.</p>
+            </div>
+
+            <!-- Receipt Card detail summary -->
+            <div class="bg-slate-50 border border-slate-100 rounded-xl p-4 space-y-2 text-xs">
+                <div class="flex justify-between"><span class="text-slate-500">Khách Hàng:</span><span class="font-bold text-slate-800" id="modalName">N/A</span></div>
+                <div class="flex justify-between"><span class="text-slate-500">Mã Bốc Thăm:</span><span class="font-bold text-brandRed font-mono" id="modalCode">ENTRY-01</span></div>
+                <div class="flex justify-between"><span class="text-slate-500">Mã Bảo Mật:</span><span class="font-bold text-slate-600 font-mono" id="modalHash">S-#####</span></div>
+                <div class="border-t border-slate-200 my-2 pt-2 text-center text-[10px] text-slate-400">
+                    Hệ thống đã lưu nhận phiếu. Chúc quý khách gặp nhiều may mắn!
+                </div>
+            </div>
+
+            <button onclick="closeSuccessModal()" class="w-full bg-brandBlue hover:bg-brandBlue-dark text-white font-bold py-2.5 rounded-xl transition-all">
+                Đóng & Xem Lại Phiếu
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notification element -->
+    <div id="customToast" class="fixed bottom-4 right-4 bg-slate-900 text-white text-xs px-4 py-3 rounded-xl shadow-2xl border border-slate-800 flex items-center gap-2.5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <span class="text-amber-400" id="toastIcon"><i class="fa-solid fa-circle-exclamation"></i></span>
+        <span id="toastText">Thông báo hệ thống</span>
+    </div>
+
+    <!-- Footer Area -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-8 px-6 mt-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="space-y-3">
+                <h4 class="font-extrabold text-white text-sm uppercase tracking-wide">Chợ Đông Ba Nam Cali</h4>
+                <p class="leading-relaxed">Địa chỉ mua sắm đặc sản và thực phẩm thuần Việt chất lượng hàng đầu tại khu vực Little Saigon Westminster. Hương vị Việt đúng chuẩn cho gia đình bạn.</p>
+                <p class="text-[11px]"><i class="fa-solid fa-map-pin mr-1 text-brandRed"></i> Westminster Ave, Westminster, CA 92683</p>
+            </div>
+            
+            <div class="space-y-3">
+                <h4 class="font-extrabold text-white text-sm uppercase tracking-wide">Nha Khoa Nụ Cười Việt</h4>
+                <p class="leading-relaxed">Kiến tạo nụ cười hoàn mỹ với dịch vụ chăm sóc răng miệng tiêu chuẩn y khoa quốc tế. Đội ngũ bác sĩ tận tâm, tận tình, trang thiết bị hiện đại hàng đầu.</p>
+                <p class="text-[11px]"><i class="fa-solid fa-globe mr-1 text-brandBlue"></i> nucuoivietdental.vn</p>
+            </div>
+
+            <div class="space-y-3">
+                <h4 class="font-extrabold text-white text-sm uppercase tracking-wide">Điều Khoản Cơ Bản</h4>
+                <ul class="space-y-1 text-[11px] list-disc list-inside">
+                    <li>Hóa đơn mua hàng phải được lưu giữ nguyên vẹn để làm bằng chứng đối soát.</li>
+                    <li>Mỗi hóa đơn hợp lệ chỉ được đăng ký duy nhất 01 lần.</li>
+                    <li>Danh sách trúng thưởng được công bố chính thức tại các quầy thu ngân.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto border-t border-slate-800/80 mt-8 pt-6 text-center text-slate-500 text-[10px] space-y-1">
+            <p>© 2026 Mua Hàng Việt - Nhận Nụ Cười Việt. Tất cả quyền sở hữu thuộc về ban tổ chức.</p>
+            <p>Landing page thiết kế chuyên nghiệp bởi Chợ Đông Ba & Nha Khoa Nụ Cười Việt.</p>
+        </div>
+    </footer>
+
+    <!-- Client Core Application Script -->
+    <script>
+        let entries = [];
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'lottery-app-viet';
+
+        // Sample Data lists for simulation helper
+        const sampleNames = ["Trần Thị Lan", "Lê Minh Quốc", "Nguyễn Minh Hằng", "Phạm Hoàng Nam", "Vũ Hoàng My", "Đỗ Tuấn Anh", "Phan Thanh Thảo", "Bùi Huy Khánh"];
+        const sampleAddresses = ["Westminster, CA", "Garden Grove, CA", "Santa Ana, CA", "Fountain Valley, CA", "Irvine, CA", "Anaheim, CA"];
+        const samplePhones = ["714-555-0192", "714-232-9481", "949-881-2231", "657-391-2309", "714-119-2041", "949-550-2011"];
+
+        window.onload = function() {
+            loadDatabase();
+            syncTicketData();
+        };
+
+        // Reload data from LocalStorage shared origin
+        function loadDatabase() {
+            const savedEntries = localStorage.getItem(`${appId}_entries`);
+            if (savedEntries) {
+                entries = JSON.parse(savedEntries);
+            }
+        }
+
+        // Save data to LocalStorage
+        function saveDatabase() {
+            localStorage.setItem(`${appId}_entries`, JSON.stringify(entries));
+        }
+
+        // Generate a pseudo secure hash matching entry logic in admin
+        function generateSecurityHash(str) {
+            let hash = 0;
+            const textToHash = str + "NUCUOIVIET_CHODONGBA";
+            for (let i = 0; i < textToHash.length; i++) {
+                hash = textToHash.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            return 'S-' + Math.abs(hash % 100000).toString().padStart(5, '0');
+        }
+
+        // Smooth custom Alert Toast notification display
+        function showToast(text, isError = false) {
+            const toast = document.getElementById('customToast');
+            const toastText = document.getElementById('toastText');
+            const toastIcon = document.getElementById('toastIcon');
+
+            toastText.textContent = text;
+            if (isError) {
+                toastIcon.innerHTML = '<i class="fa-solid fa-circle-xmark text-red-500 text-sm"></i>';
+                toast.classList.add('border-red-500/20');
+            } else {
+                toastIcon.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i>';
+                toast.classList.remove('border-red-500/20');
+            }
+
+            toast.classList.remove('opacity-0', 'translate-y-20', 'pointer-events-none');
+            
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-20', 'pointer-events-none');
+            }, 3500);
+        }
+
+        // Sync inputs with virtual Ticket preview on writing
+        function syncTicketData() {
+            const fullName = document.getElementById('fullName').value.trim();
+            const address = document.getElementById('address').value.trim();
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            const entryNumber = document.getElementById('entryNumber').value.trim().toUpperCase();
+
+            document.getElementById('ticketFullName').textContent = fullName ? fullName : "____________________________________";
+            document.getElementById('ticketAddress').textContent = address ? address : "____________________________________";
+            document.getElementById('ticketPhoneNumber').textContent = phoneNumber ? phoneNumber : "____________________________________";
+            document.getElementById('ticketEntryNumber').textContent = entryNumber ? entryNumber : "____________________________________";
+            
+            if (entryNumber) {
+                document.getElementById('ticketSecurityHash').textContent = generateSecurityHash(entryNumber);
+                document.getElementById('ticketEntryNumber').classList.add('text-brandRed');
+            } else {
+                document.getElementById('ticketSecurityHash').textContent = "S-#####";
+            }
+        }
+
+        // Fast helper tool to fill test information
+        function fillSampleData() {
+            const randomIndex = Math.floor(Math.random() * sampleNames.length);
+            const randomEntryNum = "EDB-" + Math.floor(100000 + Math.random() * 900000);
+            
+            document.getElementById('fullName').value = sampleNames[randomIndex];
+            document.getElementById('address').value = sampleAddresses[randomIndex];
+            document.getElementById('phoneNumber').value = samplePhones[randomIndex];
+            document.getElementById('entryNumber').value = randomEntryNum;
+            document.getElementById('terms').checked = true;
+
+            syncTicketData();
+            showToast("Đã nhập nhanh dữ liệu mô phỏng!");
+        }
+
+        // Submit form client execution
+        function submitForm(event) {
+            event.preventDefault();
+            
+            const fullName = document.getElementById('fullName').value.trim();
+            const address = document.getElementById('address').value.trim();
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            const entryNumber = document.getElementById('entryNumber').value.trim().toUpperCase();
+
+            loadDatabase(); // fetch latest updates from potential other sessions/panels
+
+            // Validation against duplicate registration code
+            const isDuplicated = entries.some(entry => entry.entryNumber === entryNumber);
+            if (isDuplicated) {
+                showToast("Mã số bốc thăm (Entry Number) này đã được đăng ký trước đó rồi!", true);
+                return;
+            }
+
+            const newRecord = {
+                id: crypto.randomUUID(),
+                fullName,
+                address,
+                phoneNumber,
+                entryNumber,
+                securityHash: generateSecurityHash(entryNumber),
+                createdAt: new Date().toLocaleString('vi-VN')
+            };
+
+            // Push on top and Save
+            entries.unshift(newRecord);
+            saveDatabase();
+
+            // Setup and trigger successful Modal details
+            document.getElementById('modalName').textContent = fullName;
+            document.getElementById('modalCode').textContent = entryNumber;
+            document.getElementById('modalHash').textContent = newRecord.securityHash;
+            
+            openSuccessModal();
+
+            // Clear inputs
+            document.getElementById('lotteryForm').reset();
+            syncTicketData();
+        }
+
+        function openSuccessModal() {
+            const modal = document.getElementById('successModal');
+            const card = document.getElementById('successModalCard');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                card.classList.remove('scale-95');
+                card.classList.add('scale-100');
+            }, 50);
+        }
+
+        function closeSuccessModal() {
+            const modal = document.getElementById('successModal');
+            const card = document.getElementById('successModalCard');
+            card.classList.remove('scale-100');
+            card.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 150);
+        }
+    </script>
+</body>
+</html>

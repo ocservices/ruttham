@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cổng Quản Trị & Bốc Thăm Trúng Thưởng | Ban Tổ Chức</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Lexend', 'sans-serif'],
+                    },
+                    colors: {
+                        brandBlue: {
+                            DEFAULT: '#1e40af',
+                            dark: '#1e3a8a',
+                        },
+                        brandRed: {
+                            DEFAULT: '#dc2626',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        .confetti {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            opacity: 0;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col antialiased">
+
+    <!-- Admin Header -->
+    <header class="bg-slate-900 text-white py-4 px-6 shadow-md">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-xl bg-amber-500 text-slate-900 flex items-center justify-center text-lg font-bold">
+                    <i class="fa-solid fa-lock-open"></i>
+                </span>
+                <div>
+                    <h1 class="text-lg font-extrabold tracking-tight">CỔNG QUẢN TRỊ BỐC THĂM</h1>
+                    <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Chợ Đông Ba & Nha Khoa Nụ Cười Việt</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <a href="index.html" target="_blank" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 py-2 px-4 rounded-lg font-bold transition-all border border-slate-700">
+                    <i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i>Xem trang khách hàng
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
+        
+        <!-- Summary Stats Card -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+                <div>
+                    <span class="text-xs text-slate-400 font-bold uppercase tracking-wider block">Tổng số phiếu thu thập</span>
+                    <span class="text-3xl font-black text-slate-900" id="statTotalSubmitted">0</span>
+                </div>
+                <span class="w-12 h-12 bg-blue-50 text-brandBlue rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-users-viewfinder"></i></span>
+            </div>
+            
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+                <div>
+                    <span class="text-xs text-slate-400 font-bold uppercase tracking-wider block">Hạng mục trúng thưởng</span>
+                    <span class="text-3xl font-black text-slate-900" id="statTotalWinners">0</span>
+                </div>
+                <span class="w-12 h-12 bg-amber-50 text-amber-500 rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-trophy"></i></span>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+                <div>
+                    <span class="text-xs text-slate-400 font-bold uppercase tracking-wider block">Trạng thái kết nối</span>
+                    <span class="text-sm font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full inline-block mt-1">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-ping mr-1"></span> Sẵn sàng (Local Db)
+                    </span>
+                </div>
+                <span class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-database"></i></span>
+            </div>
+        </div>
+
+        <!-- Dashboard Core Controls Section -->
+        <div class="border border-slate-200 rounded-2xl bg-white shadow-md overflow-hidden">
+            <!-- Navigation -->
+            <div class="bg-slate-50 border-b border-slate-200 px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-2">
+                    <span class="text-sm font-bold text-slate-700">Chức năng quản trị:</span>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="toggleTab('list')" id="tabBtnList" class="px-4 py-2 rounded-lg text-xs font-bold transition-all bg-brandBlue text-white shadow-sm">
+                        <i class="fa-solid fa-list-ul mr-1.5"></i>Danh Sách Đăng Ký
+                    </button>
+                    <button onclick="toggleTab('simulator')" id="tabBtnSim" class="px-4 py-2 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-800 transition-all bg-slate-200">
+                        <i class="fa-solid fa-circle-play mr-1.5 text-brandRed animate-pulse"></i>Mở Vòng Quay Bốc Thăm
+                    </button>
+                </div>
+            </div>
+
+            <!-- TAB 1: SUBMITTED CUSTOMERS LIST -->
+            <div id="tabContentList" class="p-6 space-y-4">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <!-- Search input -->
+                    <div class="relative w-full sm:max-w-xs">
+                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+                            <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                        </span>
+                        <input type="text" id="adminSearch" oninput="filterEntries()" placeholder="Tìm tên, SĐT, mã bốc thăm..."
+                            class="w-full pl-9 pr-4 py-1.5 border border-slate-200 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-brandBlue focus:border-brandBlue">
+                    </div>
+                    
+                    <!-- Admin utilities -->
+                    <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+                        <button onclick="clearAllEntries()" class="text-xs font-semibold text-red-500 hover:text-red-700 transition-colors flex items-center gap-1 py-1.5 px-3 rounded-lg hover:bg-red-50">
+                            <i class="fa-solid fa-trash-can"></i> Xóa toàn bộ
+                        </button>
+                        <button onclick="generateMockDatabase()" class="text-xs font-semibold text-emerald-600 hover:text-emerald-800 transition-colors flex items-center gap-1 py-1.5 px-3 rounded-lg hover:bg-emerald-50">
+                            <i class="fa-solid fa-plus-circle"></i> Nạp 10 mẫu nhanh
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Database Table view -->
+                <div class="overflow-x-auto border border-slate-100 rounded-xl">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-50 text-slate-600 border-b border-slate-200 font-bold">
+                                <th class="p-3">Họ và Tên</th>
+                                <th class="p-3">Số điện thoại</th>
+                                <th class="p-3">Địa chỉ</th>
+                                <th class="p-3">Mã bốc thăm (Entry)</th>
+                                <th class="p-3">Thời gian đăng ký</th>
+                                <th class="p-3 text-center">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="entriesTableBody" class="divide-y divide-slate-100 text-slate-700">
+                            <tr>
+                                <td colspan="6" class="p-8 text-center text-slate-400 font-medium">
+                                    <div class="flex flex-col items-center gap-2">
+                                        <i class="fa-solid fa-folder-open text-2xl"></i>
+                                        <span>Không có dữ liệu trong hệ thống local. Hãy bấm nạp 10 mẫu hoặc điền từ trang đăng ký!</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 2: LIVE SIMULATOR & WHEEL SPIN -->
+            <div id="tabContentSimulator" class="p-6 space-y-6 hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <!-- Wheel spinning dashboard graphic (L) -->
+                    <div class="lg:col-span-7 flex flex-col items-center justify-center space-y-6 bg-slate-50 rounded-2xl p-6 border border-slate-150 min-h-[400px] relative">
+                        <!-- Pseudo Screen Display -->
+                        <div class="text-center space-y-1">
+                            <span class="text-xs font-bold uppercase text-slate-400 tracking-wider">Màn hình hiển thị mã số trúng giải</span>
+                            <div class="bg-slate-950 text-emerald-400 font-mono font-bold text-4xl py-3.5 px-8 rounded-xl tracking-widest shadow-inner border border-slate-800" id="drawDisplayNumber">
+                                NO-ENTRY
+                            </div>
+                        </div>
+
+                        <!-- Graphical Spinner Interface representation -->
+                        <div class="relative w-56 h-56 flex items-center justify-center">
+                            <!-- Outer decorative golden ring -->
+                            <div class="absolute inset-0 rounded-full border-4 border-amber-500 animate-spin" style="animation-duration: 15s;"></div>
+                            <div class="absolute inset-2 rounded-full border-2 border-dashed border-slate-300"></div>
+                            
+                            <!-- Internal Center clickable core -->
+                            <div class="w-40 h-40 rounded-full bg-slate-900 shadow-lg border-4 border-white flex flex-col items-center justify-center text-white p-4 text-center z-10" id="spinCoreCircle">
+                                <i class="fa-solid fa-clover text-3xl text-amber-300 animate-bounce"></i>
+                                <span class="text-[10px] uppercase font-bold tracking-wider mt-1 text-slate-400">Trạng thái</span>
+                                <span class="text-xs font-extrabold text-amber-400">SẴN SÀNG QUAY</span>
+                            </div>
+
+                            <!-- Pointer particles -->
+                            <div class="absolute top-0 w-2 h-2 bg-brandRed rounded-full -translate-y-1"></div>
+                            <div class="absolute right-0 w-2 h-2 bg-brandRed rounded-full translate-x-1"></div>
+                            <div class="absolute bottom-0 w-2 h-2 bg-brandRed rounded-full translate-y-1"></div>
+                            <div class="absolute left-0 w-2 h-2 bg-brandRed rounded-full -translate-x-1"></div>
+                        </div>
+
+                        <!-- Controls -->
+                        <div class="flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
+                            <div class="space-y-1 w-full sm:max-w-xs text-center sm:text-left">
+                                <label for="drawPrizeType" class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest">Hạng mục quay giải</label>
+                                <select id="drawPrizeType" class="bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-bold text-slate-700 w-full focus:ring-1 focus:ring-brandBlue">
+                                    <option value="Giải Tháng: Giỏ hàng Chợ Đông Ba ($200)">Giải Tháng: Giỏ hàng Chợ Đông Ba ($200)</option>
+                                    <option value="Giải Tháng: Gói chăm sóc răng miệng ($400)">Giải Tháng: Gói chăm sóc răng miệng ($400)</option>
+                                    <option value="Giải Đặc Biệt: Giỏ hàng cao cấp Chợ Đông Ba ($300)">Giải Đặc Biệt: Giỏ hàng cao cấp Chợ Đông Ba ($300)</option>
+                                    <option value="Giải Đặc Biệt: Tour Huế & Nha khoa mới ($1500)">Giải Đặc Biệt: Tour Huế & Nha khoa mới ($1500)</option>
+                                </select>
+                            </div>
+                            
+                            <button onclick="startLuckyDraw()" id="btnStartDraw" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-extrabold text-xs px-6 py-3 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 transform active:scale-95 w-full sm:w-auto mt-4 sm:mt-0">
+                                <i class="fa-solid fa-shuffle"></i> QUAY SỐ NGẪU NHIÊN
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Live winner board feed showing current session records (R) -->
+                    <div class="lg:col-span-5 space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                            <span class="text-xs font-bold uppercase text-slate-700 flex items-center gap-1.5">
+                                <i class="fa-solid fa-award text-amber-500"></i>
+                                Bảng Vàng Trúng Thưởng (Live Winners)
+                            </span>
+                            <button onclick="clearWinners()" class="text-[10px] text-slate-400 hover:text-red-500 font-semibold">
+                                <i class="fa-solid fa-rotate-left"></i> Reset danh sách trúng
+                            </button>
+                        </div>
+
+                        <div id="winnersList" class="space-y-3 max-h-[350px] overflow-y-auto pr-1">
+                            <div class="text-center py-12 text-slate-400 bg-slate-50 rounded-xl border border-dashed border-slate-200" id="noWinnerState">
+                                <i class="fa-solid fa-trophy text-2xl text-slate-300 mb-2"></i>
+                                <p class="text-xs font-medium">Chưa có người trúng giải nào.</p>
+                                <p class="text-[10px] text-slate-400 mt-0.5">Tiến hành bốc thăm để tìm ra người chiến thắng.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Celebration modal popping on screen -->
+    <div id="celebrationModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-8 text-center space-y-6 relative overflow-hidden shadow-2xl border border-slate-100" id="celebrationModalCard">
+            
+            <!-- Confetti container background representation -->
+            <div id="confettiContainer" class="absolute inset-0 pointer-events-none"></div>
+
+            <div class="space-y-2">
+                <span class="bg-amber-400 text-slate-900 font-bold text-[10px] px-3.5 py-1.5 rounded-full uppercase tracking-wider inline-block">
+                    Chúc mừng chiến thắng!
+                </span>
+                <h3 class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-red-500">XƯỚNG TÊN TRÚNG GIẢI</h3>
+                <p class="text-xs text-slate-400" id="celebrationPrizeTitle">Giải đặc biệt</p>
+            </div>
+
+            <!-- Card detailing the lucky draw winner -->
+            <div class="bg-blue-50 border-2 border-blue-200/50 rounded-2xl p-6 shadow-md max-w-sm mx-auto space-y-3">
+                <span class="text-[10px] text-brandBlue uppercase font-black tracking-widest block">Mã bốc thăm</span>
+                <span class="text-4xl font-mono font-black text-brandBlue tracking-wider block" id="celebrationCode">CODE#####</span>
+                
+                <div class="border-t border-blue-200/30 pt-3 space-y-1">
+                    <span class="text-base font-extrabold text-slate-800 block" id="celebrationName">N/A</span>
+                    <span class="text-xs text-slate-500 block" id="celebrationPhone">090-XXX-XXXX</span>
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <p class="text-xs text-slate-500 max-w-xs mx-auto">
+                    Ban tổ chức sẽ trực tiếp liên hệ theo thông tin số điện thoại phía trên để đối soát hóa đơn giấy và trao thưởng.
+                </p>
+                <button onclick="closeCelebrationModal()" class="w-full bg-red-600 hover:bg-red-700 text-white font-extrabold py-3 px-4 rounded-xl shadow-md transition-all">
+                    TIẾP TỤC BỐC THĂM
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert toast -->
+    <div id="customToast" class="fixed bottom-4 right-4 bg-slate-900 text-white text-xs px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <span class="text-amber-400" id="toastIcon"><i class="fa-solid fa-circle-exclamation"></i></span>
+        <span id="toastText">Thông báo hệ thống</span>
+    </div>
+
+    <!-- Core Script matching localstorage schema with index.html -->
+    <script>
+        let entries = [];
+        let winners = [];
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'lottery-app-viet';
+
+        // Static sample generation arrays
+        const sampleNames = ["Trần Thị Lan", "Lê Minh Quốc", "Nguyễn Minh Hằng", "Phạm Hoàng Nam", "Vũ Hoàng My", "Đỗ Tuấn Anh", "Phan Thanh Thảo", "Bùi Huy Khánh"];
+        const sampleAddresses = ["Westminster, CA", "Garden Grove, CA", "Santa Ana, CA", "Fountain Valley, CA", "Irvine, CA", "Anaheim, CA"];
+        const samplePhones = ["714-555-0192", "714-232-9481", "949-881-2231", "657-391-2309", "714-119-2041", "949-550-2011"];
+
+        window.onload = function() {
+            loadDatabase();
+            renderEntriesTable();
+            renderWinnersList();
+        };
+
+        function loadDatabase() {
+            const savedEntries = localStorage.getItem(`${appId}_entries`);
+            const savedWinners = localStorage.getItem(`${appId}_winners`);
+            
+            entries = savedEntries ? JSON.parse(savedEntries) : [];
+            winners = savedWinners ? JSON.parse(savedWinners) : [];
+            updateStatsUI();
+        }
+
+        function saveDatabase() {
+            localStorage.setItem(`${appId}_entries`, JSON.stringify(entries));
+            localStorage.setItem(`${appId}_winners`, JSON.stringify(winners));
+            updateStatsUI();
+        }
+
+        function updateStatsUI() {
+            document.getElementById('statTotalSubmitted').textContent = entries.length;
+            document.getElementById('statTotalWinners').textContent = winners.length;
+        }
+
+        function showToast(text, isError = false) {
+            const toast = document.getElementById('customToast');
+            const toastText = document.getElementById('toastText');
+            const toastIcon = document.getElementById('toastIcon');
+
+            toastText.textContent = text;
+            toastIcon.innerHTML = isError ? 
+                '<i class="fa-solid fa-circle-xmark text-red-500 text-sm"></i>' : 
+                '<i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i>';
+
+            toast.classList.remove('opacity-0', 'translate-y-20', 'pointer-events-none');
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-20', 'pointer-events-none');
+            }, 3000);
+        }
+
+        function renderEntriesTable(dataToRender = null) {
+            const tableBody = document.getElementById('entriesTableBody');
+            const targetData = dataToRender || entries;
+
+            if (targetData.length === 0) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="p-8 text-center text-slate-400 font-medium">
+                            <div class="flex flex-col items-center gap-2">
+                                <i class="fa-solid fa-folder-open text-2xl"></i>
+                                <span>Không tìm thấy phiếu nào phù hợp.</span>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tableBody.innerHTML = targetData.map(entry => `
+                <tr class="hover:bg-slate-50 transition-colors border-b border-slate-150 text-slate-700">
+                    <td class="p-3 font-semibold text-slate-900">${escapeHTML(entry.fullName)}</td>
+                    <td class="p-3 font-mono text-slate-600">${escapeHTML(entry.phoneNumber)}</td>
+                    <td class="p-3 text-slate-500">${escapeHTML(entry.address)}</td>
+                    <td class="p-3"><span class="bg-red-50 text-red-600 px-2 py-0.5 rounded font-mono font-bold">${escapeHTML(entry.entryNumber)}</span></td>
+                    <td class="p-3 text-slate-400 text-[11px]">${entry.createdAt}</td>
+                    <td class="p-3 text-center">
+                        <button onclick="deleteSingleEntry('${entry.id}')" class="text-slate-400 hover:text-red-500 p-1 rounded hover:bg-red-50 transition-all" title="Xóa">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function deleteSingleEntry(id) {
+            entries = entries.filter(e => e.id !== id);
+            saveDatabase();
+            renderEntriesTable();
+            showToast("Đã xóa 1 phiếu bốc thăm!");
+        }
+
+        function clearAllEntries() {
+            if (entries.length === 0) return;
+            if (confirm("Xóa hoàn toàn mọi phiếu đã lưu? Hành động này không thể hoàn tác.")) {
+                entries = [];
+                saveDatabase();
+                renderEntriesTable();
+                showToast("Đã xóa sạch bộ nhớ!");
+            }
+        }
+
+        function generateMockDatabase() {
+            for (let i = 0; i < 10; i++) {
+                const randName = sampleNames[Math.floor(Math.random() * sampleNames.length)];
+                const randAddr = sampleAddresses[Math.floor(Math.random() * sampleAddresses.length)];
+                const randPhone = samplePhones[Math.floor(Math.random() * samplePhones.length)];
+                const randEntry = "EDB-" + Math.floor(100000 + Math.random() * 900000);
+                
+                if (!entries.some(e => e.entryNumber === randEntry)) {
+                    entries.push({
+                        id: crypto.randomUUID(),
+                        fullName: randName,
+                        address: randAddr,
+                        phoneNumber: randPhone,
+                        entryNumber: randEntry,
+                        securityHash: 'S-' + Math.floor(10000 + Math.random() * 90000),
+                        createdAt: new Date().toLocaleString('vi-VN')
+                    });
+                }
+            }
+            saveDatabase();
+            renderEntriesTable();
+            showToast("Nạp thành công 10 phiếu bốc thăm mô phỏng!");
+        }
+
+        function filterEntries() {
+            const searchVal = document.getElementById('adminSearch').value.toLowerCase().trim();
+            if (!searchVal) {
+                renderEntriesTable();
+                return;
+            }
+            const filtered = entries.filter(e => 
+                e.fullName.toLowerCase().includes(searchVal) || 
+                e.phoneNumber.includes(searchVal) || 
+                e.entryNumber.toLowerCase().includes(searchVal)
+            );
+            renderEntriesTable(filtered);
+        }
+
+        function toggleTab(tabName) {
+            const tabBtnList = document.getElementById('tabBtnList');
+            const tabBtnSim = document.getElementById('tabBtnSim');
+            const contentList = document.getElementById('tabContentList');
+            const contentSim = document.getElementById('tabContentSimulator');
+
+            if (tabName === 'list') {
+                tabBtnList.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all bg-brandBlue text-white shadow-sm";
+                tabBtnSim.className = "px-4 py-2 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-800 transition-all bg-slate-200";
+                contentList.classList.remove('hidden');
+                contentSim.classList.add('hidden');
+            } else {
+                tabBtnSim.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all bg-brandBlue text-white shadow-sm";
+                tabBtnList.className = "px-4 py-2 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-800 transition-all bg-slate-200";
+                contentSim.classList.remove('hidden');
+                contentList.classList.add('hidden');
+            }
+            loadDatabase(); // Keep in sync
+        }
+
+        function renderWinnersList() {
+            const listContainer = document.getElementById('winnersList');
+            const noWinnerState = document.getElementById('noWinnerState');
+
+            // Preserving state and removing previous items
+            const prevWinners = listContainer.querySelectorAll('.winner-item-plate');
+            prevWinners.forEach(node => node.remove());
+
+            if (winners.length === 0) {
+                noWinnerState.classList.remove('hidden');
+                return;
+            }
+
+            noWinnerState.classList.add('hidden');
+
+            winners.forEach(winner => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = "winner-item-plate bg-gradient-to-r from-amber-500/5 to-yellow-500/10 border border-amber-300 rounded-xl p-3 flex items-center justify-between gap-3 shadow-sm";
+                itemDiv.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-amber-400 text-slate-900 flex items-center justify-center font-bold text-sm">
+                            🏆
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-slate-800 block">${escapeHTML(winner.name)}</span>
+                            <span class="text-[10px] text-slate-500 block">SĐT: ${escapeHTML(winner.phone)}</span>
+                            <span class="text-[10px] text-brandBlue font-semibold block">${escapeHTML(winner.prizeName)}</span>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs font-mono font-bold text-brandRed bg-white border border-brandRed/10 px-2 py-0.5 rounded">${escapeHTML(winner.code)}</span>
+                        <span class="text-[9px] text-slate-400 block mt-1">${winner.drawnAt}</span>
+                    </div>
+                `;
+                listContainer.prepend(itemDiv);
+            });
+        }
+
+        function clearWinners() {
+            if (winners.length === 0) return;
+            if (confirm("Reset lại bảng danh sách người chiến thắng?")) {
+                winners = [];
+                saveDatabase();
+                renderWinnersList();
+                showToast("Đã reset danh sách trúng giải!");
+            }
+        }
+
+        // Web Audio Api Synth
+        function playBeep(freq, type, duration) {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+
+                oscillator.type = type || 'sine';
+                oscillator.frequency.setValueAtTime(freq || 440, audioCtx.currentTime);
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + duration);
+            } catch (e) {}
+        }
+
+        let isDrawing = false;
+        function startLuckyDraw() {
+            if (isDrawing) return;
+
+            loadDatabase(); // reload fresh entries
+
+            if (entries.length === 0) {
+                showToast("Không có người đăng ký để thực hiện quay số bốc thăm!", true);
+                toggleTab('list');
+                return;
+            }
+
+            const prizeType = document.getElementById('drawPrizeType').value;
+            const drawDisplayNumber = document.getElementById('drawDisplayNumber');
+            const spinCoreCircle = document.getElementById('spinCoreCircle');
+            const btnStartDraw = document.getElementById('btnStartDraw');
+
+            isDrawing = true;
+            btnStartDraw.disabled = true;
+            btnStartDraw.classList.add('opacity-50', 'cursor-not-allowed');
+            spinCoreCircle.classList.add('bg-amber-500');
+            spinCoreCircle.querySelector('span').textContent = "ĐANG QUAY...";
+            
+            let duration = 3000;
+            const timer = setInterval(() => {
+                const tempIndex = Math.floor(Math.random() * entries.length);
+                drawDisplayNumber.textContent = entries[tempIndex].entryNumber;
+                playBeep(300 + Math.random() * 500, 'triangle', 0.05);
+            }, 80);
+
+            setTimeout(() => {
+                clearInterval(timer);
+                
+                const winnerIndex = Math.floor(Math.random() * entries.length);
+                const finalWinner = entries[winnerIndex];
+
+                drawDisplayNumber.textContent = finalWinner.entryNumber;
+                
+                // Sound fanfare
+                playBeep(523.25, 'sine', 0.15); 
+                setTimeout(() => playBeep(659.25, 'sine', 0.15), 150); 
+                setTimeout(() => playBeep(783.99, 'sine', 0.15), 300); 
+                setTimeout(() => playBeep(1046.50, 'sine', 0.4), 450); 
+
+                const winnerRecord = {
+                    name: finalWinner.fullName,
+                    phone: finalWinner.phoneNumber,
+                    code: finalWinner.entryNumber,
+                    prizeName: prizeType,
+                    drawnAt: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })
+                };
+                
+                winners.push(winnerRecord);
+                saveDatabase();
+                renderWinnersList();
+                triggerCelebrationModal(winnerRecord);
+
+                isDrawing = false;
+                btnStartDraw.disabled = false;
+                btnStartDraw.classList.remove('opacity-50', 'cursor-not-allowed');
+                spinCoreCircle.classList.remove('bg-amber-500');
+                spinCoreCircle.querySelector('span').textContent = "QUAY SỐ";
+
+            }, duration);
+        }
+
+        function triggerCelebrationModal(winner) {
+            document.getElementById('celebrationPrizeTitle').textContent = winner.prizeName;
+            document.getElementById('celebrationCode').textContent = winner.code;
+            document.getElementById('celebrationName').textContent = winner.name;
+            document.getElementById('celebrationPhone').textContent = winner.phone;
+
+            const modal = document.getElementById('celebrationModal');
+            const card = document.getElementById('celebrationModalCard');
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                card.classList.remove('scale-95');
+                card.classList.add('scale-100');
+            }, 50);
+
+            const container = document.getElementById('confettiContainer');
+            container.innerHTML = '';
+            for (let i = 0; i < 40; i++) {
+                const conf = document.createElement('div');
+                conf.className = 'confetti';
+                conf.style.left = Math.random() * 100 + '%';
+                conf.style.top = Math.random() * 100 + '%';
+                conf.style.backgroundColor = ['#f39c12', '#e74c3c', '#3498db', '#2ecc71', '#9b59b6'][Math.floor(Math.random() * 5)];
+                conf.style.transform = `rotate(${Math.random() * 360}deg) scale(${0.5 + Math.random() * 1.5})`;
+                conf.style.opacity = '0.8';
+                conf.style.transition = 'all 1.5s ease-out';
+                container.appendChild(conf);
+
+                setTimeout(() => {
+                    conf.style.transform = `translate(${(Math.random() - 0.5) * 150}px, ${(Math.random() - 0.5) * 150}px) rotate(${Math.random() * 720}deg)`;
+                    conf.style.opacity = '0';
+                }, 50);
+            }
+        }
+
+        function closeCelebrationModal() {
+            const modal = document.getElementById('celebrationModal');
+            const card = document.getElementById('celebrationModalCard');
+            card.classList.remove('scale-100');
+            card.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 150);
+        }
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, 
+                tag => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    "'": '&#39;',
+                    '"': '&quot;'
+                }[tag] || tag)
+            );
+        }
+    </script>
+</body>
+</html>
