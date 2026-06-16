@@ -74,7 +74,7 @@
             </div>
             <div>
               <label class="field-label">Số Điện Thoại <span class="text-cdbRed">*</span></label>
-              <input id="phone" name="phone" required inputmode="numeric" autocomplete="tel" maxlength="10" pattern="[0-9]{10}" placeholder="Ví dụ: 7148918028" class="form-input" />
+              <input id="phone" name="phone" required inputmode="numeric" autocomplete="tel" maxlength="10" placeholder="Ví dụ: 7148918028" class="form-input" />
             </div>
             <div>
               <label class="field-label">Thành Phố, Tiểu Bang <span class="text-cdbRed">*</span></label>
@@ -186,7 +186,7 @@
         createdAt: new Date().toISOString()
       };
 
-      if (!/^CDB\d{5,}$/.test(payload.ticket)) {
+      if (!/^CDB\d{5}$/.test(payload.ticket)) {
         return showError('Mã Phiếu Rút Thăm nên có dạng CDB00001. Vui lòng kiểm tra lại.');
       }
       if (!/^\d{10}$/.test(payload.phone)) {
