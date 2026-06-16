@@ -66,7 +66,7 @@
           <div class="desktop-grid">
             <div>
               <label class="field-label">Mã Phiếu Rút Thăm <span class="text-cdbRed">*</span></label>
-              <input id="ticket" name="ticket" required autocomplete="off" placeholder="Ví dụ: CDB000001" class="form-input uppercase" />
+              <input id="ticket" name="ticket" required autocomplete="off" placeholder="Ví dụ: CDB00001" class="form-input uppercase" />
             </div>
             <div>
               <label class="field-label">Họ và Tên <span class="text-cdbRed">*</span></label>
@@ -74,7 +74,7 @@
             </div>
             <div>
               <label class="field-label">Số Điện Thoại <span class="text-cdbRed">*</span></label>
-              <input id="phone" name="phone" required inputmode="tel" autocomplete="tel" placeholder="Ví dụ: 714-XXX-XXXX" class="form-input" />
+              <input id="phone" name="phone" required inputmode="numeric" autocomplete="tel" maxlength="10" pattern="[0-9]{10}" placeholder="Ví dụ: 7148918028" class="form-input" />
             </div>
             <div>
               <label class="field-label">Thành Phố, Tiểu Bang <span class="text-cdbRed">*</span></label>
@@ -176,7 +176,7 @@
         action: 'submit',
         ticket: clean(ticket.value).toUpperCase().replace(/[^A-Z0-9]/g,''),
         fullName: clean(fullName.value),
-        phone: clean(phone.value),
+        phone: clean(phone.value).replace(/\D/g, ''),
         city: clean(city.value),
         source: sourceChoice ? sourceChoice.value : '',
         sourceOther: clean(sourceOther.value),
@@ -188,6 +188,9 @@
 
       if (!/^CDB\d{5,}$/.test(payload.ticket)) {
         return showError('Mã Phiếu Rút Thăm nên có dạng CDB00001. Vui lòng kiểm tra lại.');
+      }
+      if (!/^\d{10}$/.test(payload.phone)) {
+        return showError('Số điện thoại phải gồm đúng 10 số. Ví dụ: 7148918028');
       }
       if (!payload.source || !payload.dentalInterest) {
         return showError('Vui lòng chọn đầy đủ nguồn biết chương trình và thông tin quan tâm Nha Khoa Du Lịch.');
