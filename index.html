@@ -186,8 +186,8 @@
         createdAt: new Date().toISOString()
       };
 
-      if (!/^CDB\d{6,}$/.test(payload.ticket)) {
-        return showError('Mã Phiếu Rút Thăm nên có dạng CDB000001. Vui lòng kiểm tra lại.');
+      if (!/^CDB\d{5,}$/.test(payload.ticket)) {
+        return showError('Mã Phiếu Rút Thăm nên có dạng CDB00001. Vui lòng kiểm tra lại.');
       }
       if (!payload.source || !payload.dentalInterest) {
         return showError('Vui lòng chọn đầy đủ nguồn biết chương trình và thông tin quan tâm Nha Khoa Du Lịch.');
